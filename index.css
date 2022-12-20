@@ -1,6 +1,9 @@
 :root{
     --background: #121213;
     --slot-border: #3a3a3c;
+    --active-border: #fff;
+    --exact: #538d4e;
+    --contains: #b59f3b;
     --key: grey;
 }
 
@@ -47,6 +50,15 @@ body{
     height: 50px;
     border: 2px var(--slot-border) solid;
     margin: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+
+.active-slot{
+    border: var(--active-border) 2px solid;
 }
 
 .key-row{
@@ -66,4 +78,15 @@ body{
     align-items: center;
     font-size: 25px;
     cursor: pointer;
+}
+
+.exact{
+    background-color: var(--exact);
+    border: var(--exact) 2px solid;
+}
+
+.contains{
+    background-color: var(--contains);
+    border: var(--contains) 2px solid;
+
 }
