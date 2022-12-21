@@ -45,7 +45,7 @@ body{
     margin: 0 auto;
 }
 
-.key-board{
+.keyboard{
     height: var(--keyboard-height);
     margin: 0px 8px;
 }
@@ -87,6 +87,7 @@ body{
     flex: 1;
     font-size: 13px;
     cursor: pointer;
+    margin: 0 6px 0 0;
 }
 
 .correct{

@@ -2,7 +2,7 @@
 const WORD_LENGTH = 5;
 const ATTEMPTS = 6;
 const KEYBOARD_LAYOUT = "QWERTYUIOP,ASDFGHJKL,ZXCVBNM"
-const word = "BLOCK";
+const word = "MAHAL";
 
 
 const handleKeyEnter = (letter) => {
@@ -124,8 +124,8 @@ const renderKeyboard = () => {
         if(i == 2){
             const enterKey = document.createElement("div");
             const deleteKey = document.createElement("div");
-            enterKey.innerText = "E";
-            deleteKey.innerText = "X";
+            enterKey.innerText = "ENTER";
+            deleteKey.innerText = "DELETE";
             enterKey.classList.add("key")
             deleteKey.classList.add("key")
             enterKey.addEventListener("click", ()=>checkGuess())
