@@ -2,7 +2,7 @@
 const WORD_LENGTH = 5;
 const ATTEMPTS = 6;
 const KEYBOARD_LAYOUT = "QWERTYUIOP,ASDFGHJKL,ZXCVBNM"
-const word = "MAHAL";
+const word = "CLIMB";
 
 
 const handleKeyEnter = (letter) => {
