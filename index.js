@@ -1,11 +1,15 @@
 // constants
 const WORD_LENGTH = 5;
 const ATTEMPTS = 6;
-const KEYBOARD_LAYOUT = "qwertyuiop,asdfghjkl,zxcvbnm"
-const word = "muahh";
+const KEYBOARD_LAYOUT = "QWERTYUIOP,ASDFGHJKL,ZXCVBNM"
+const word = "BLOCK";
 
 
 const handleKeyEnter = (letter) => {
+
+    // check there are available spaces
+    if(currentGuess.length >= WORD_LENGTH) return 
+
     // update data
     currentGuess.push(letter)
 
@@ -16,30 +20,55 @@ const handleKeyEnter = (letter) => {
 
     // display letter
     slot.innerText = letter
-
-    // handle final letter and row update
-    if(currentGuess.length == 5){
-        // check guess
-        checkGuess(row)
-        currentRow += 1
-        currentGuess = []
-    }else{
-
-    }
-
-    
 }
 
-const checkGuess = (row) => {
+const handleKeyDelete = () => {
+
+    // check there's something to delete
+    if(currentGuess.length <= 0) return 
+
+    const row = document.getElementById(`row${currentRow}`)
+    const slot = row.querySelector(`#slot${currentGuess.length -1}`)
+    slot.classList.remove("active-slot")
+    slot.innerText = ""
+    currentGuess.pop()
+}
+
+const checkGuess = () => {
+    // check all letters have been guessed
+    if(currentGuess.length < 5) return
+
+    const row = document.getElementById(`row${currentRow}`)
+
+    // update ui
     for(let i=0;i<5;i++){
         const slot = row.querySelector(`#slot${i}`)
+        const key = document.getElementById(`key${slot.innerText}`)
+        console.log(slot.innerText)
         if(word[i] == currentGuess[i]){
-            slot.classList.add("exact")
+            slot.classList.add("correct")
+            key.classList.add("correct-key")
+            continue
         }
         else if(word.includes(currentGuess[i])){
-            slot.classList.add("contains")
+            slot.classList.add("present")
+            key.classList.add("present-key")
+            continue
+        }else{
+            slot.classList.add("absent")
+            key.classList.add("absent-key")
+
         }
-    }    
+    }
+    
+    if(word == currentGuess.join("")){
+        return
+    }else if(currentRow == ATTEMPTS -1){
+        return
+    }
+
+    currentGuess = []
+    currentRow += 1
 }
 
 
@@ -85,9 +114,10 @@ const renderKeyboard = () => {
 
         // create keys
         for(let j=0;j<keyboard_layout[i].length;j++){
-            const key = document.createElement("div")
+            const key = document.createElement("button")
             key.classList.add("key")
             key.textContent = keyboard_layout[i][j]
+            key.id = `key${keyboard_layout[i][j]}`
             key.addEventListener("click", ()=>handleKeyEnter(keyboard_layout[i][j]))
             row.appendChild(key)
         }
@@ -98,6 +128,8 @@ const renderKeyboard = () => {
             deleteKey.innerText = "X";
             enterKey.classList.add("key")
             deleteKey.classList.add("key")
+            enterKey.addEventListener("click", ()=>checkGuess())
+            deleteKey.addEventListener("click", ()=>handleKeyDelete())
             row.insertBefore(enterKey,row.firstChild)
             row.appendChild(deleteKey)
         }
