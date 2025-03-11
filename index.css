@@ -1,7 +1,7 @@
 :root{
     --background: #121213;
     --slot-border: #3a3a3c;
-    --active-border: #fff;
+    --active-border: #565758;
     --correct: #538d4e;
     --present: #b59f3b;
     --absent: #3a3a3c;
@@ -43,6 +43,7 @@ body{
 
 .gameboard{
     margin: 0 auto;
+    margin-bottom: 0.5rem;
 }
 
 .keyboard{
@@ -57,7 +58,7 @@ body{
 .slot{
     width: 59px;
     height: 59px;
-    border: 2px var(--slot-border) solid;
+    border: 3px var(--slot-border) solid;
     margin: 5px;
     color: white;
     display: flex;
@@ -72,12 +73,13 @@ body{
 
 .key-row{
     display: flex;
-    width: 100%;
+    justify-content: center;
     margin: 0 auto 8px;
 }
 
 .key{
     background-color: var(--key);
+    border: none;
     height: 58px;
     color: white;
     border-radius: 4px;
@@ -85,7 +87,8 @@ body{
     justify-content: center;
     align-items: center;
     flex: 1;
-    font-size: 13px;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
     margin: 0 6px 0 0;
 }

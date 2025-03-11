@@ -22,6 +22,7 @@ const handleKeyEnter = (letter) => {
     slot.innerText = letter
 }
 
+
 const handleKeyDelete = () => {
 
     // check there's something to delete
@@ -33,6 +34,23 @@ const handleKeyDelete = () => {
     slot.innerText = ""
     currentGuess.pop()
 }
+
+const onKeyDown = (event) => {
+    if(event.key === "Backspace"){
+        return handleKeyDelete();
+    }
+
+    if(event.key === "Enter"){
+        return checkGuess();
+    }
+
+    const eventKey = event.key.toUpperCase();
+
+    if(KEYBOARD_LAYOUT.includes(eventKey)){
+        handleKeyEnter(eventKey);
+    }
+};
+
 
 const checkGuess = () => {
     // check all letters have been guessed
@@ -103,6 +121,7 @@ const renderBoard = () => {
     }
 }
 
+
 const renderKeyboard = () => {
     const keyboard = document.getElementById("keyboard")
     const keyboard_layout = KEYBOARD_LAYOUT.split(",")
@@ -121,6 +140,7 @@ const renderKeyboard = () => {
             key.addEventListener("click", ()=>handleKeyEnter(keyboard_layout[i][j]))
             row.appendChild(key)
         }
+
         if(i == 2){
             const enterKey = document.createElement("div");
             const deleteKey = document.createElement("div");
@@ -134,18 +154,16 @@ const renderKeyboard = () => {
             row.appendChild(deleteKey)
         }
         
-
         keyboard.appendChild(row)
     }
 
 }
 
-
+document.addEventListener("keydown", onKeyDown);
 
 var data = []
 var currentGuess = []
 var currentRow = 0
-
 
 // render board
 renderBoard()
